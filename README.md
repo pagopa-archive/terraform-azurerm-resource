@@ -21,7 +21,7 @@ resource "azurerm_resource_group" "integration_account" {
 }
 
 module "integration_account" {
-  source         = "../"
+  source         = "innovationnorway/resource/azurerm"
   api_version    = "2016-06-01"
   type           = "Microsoft.Logic/IntegrationAccounts"
   name           = "my-integration-account"
@@ -46,13 +46,14 @@ resource "azurerm_resource_group" "app_service" {
 }
 
 module "app_service_plan" {
-  source         = "../"
+  source         = "innovationnorway/resource/azurerm"
   api_version    = "2018-02-01"
   type           = "Microsoft.Web/serverfarms"
   name           = "my-app-service-plan"
   resource_group = "${azurerm_resource_group.app_service.name}"
 
   properties = {
+    # Hyper-V container app service plan
     kind = "xenon"
   }
 
