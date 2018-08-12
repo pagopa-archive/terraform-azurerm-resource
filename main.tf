@@ -7,11 +7,17 @@ resource "azurerm_template_deployment" "resource" {
   resource_group_name = "${data.azurerm_resource_group.resource.name}"
   deployment_mode     = "${var.deployment_mode}"
 
-  template_body = <<TEMPLATE
+  template_body = <<DEPLOY
 {
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
+        "apiVersion": {
+            "type": "string"
+        },
+        "name": {
+            "type": "string"
+        },
         "properties": {
             "type": "string"
         },
@@ -21,18 +27,26 @@ resource "azurerm_template_deployment" "resource" {
     },
     "resources": [
         {
-            "apiVersion": "${var.api_version}",
-            "name": "${var.name}",
+            "apiVersion": "[parameters('apiVersion')]",
+            "name": "[parameters('name')]",
             "type": "${var.type}",
             "location": "[resourceGroup().location]",
             "properties": "[json(parameters('properties'))]",
             "sku": "[json(parameters('sku'))]"
         }
-    ]
+    ],
+    "outputs": {
+        "id": {
+            "type": "string",
+            "value": "[resourceId('${var.type}', parameters('name'))]"
+        }
+    }
 }
-TEMPLATE
+DEPLOY
 
   parameters {
+    "apiVersion" = "${var.api_version}"
+    "name"       = "${var.name}"
     "properties" = "${jsonencode(var.properties)}"
     "sku"        = "${jsonencode(var.sku)}"
   }
