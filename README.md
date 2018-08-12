@@ -37,36 +37,34 @@ output "integration_account_id" {
 }
 ```
 
-Example 2 (App Service Plan):
+Example 2 (API Management Servie):
 
 ```hcl
-resource "azurerm_resource_group" "app_service" {
-  name     = "my-app-service-rg"
+resource "azurerm_resource_group" "api_management" {
+  name     = "my-api-management-rg"
   location = "westeurope"
 }
 
-module "app_service_plan" {
+module "api_management" {
   source         = "innovationnorway/resource/azurerm"
-  api_version    = "2018-02-01"
-  type           = "Microsoft.Web/serverfarms"
-  name           = "my-app-service-plan"
-  resource_group = "${azurerm_resource_group.app_service.name}"
+  api_version    = "2018-01-01"
+  type           = "Microsoft.ApiManagement/service"
+  name           = "my-api-management-service"
+  resource_group = "${azurerm_resource_group.api_management.name}"
 
-  properties = {
-    # Hyper-V container app service plan
-    kind = "xenon"
+  properties {
+    publisherEmail = "name@example.com"
+    publisherName  = "ACME Corp"
   }
 
   sku {
-    name   = "PC3"
-    tier   = "PremiumContainer"
-    size   = "PC3"
-    family = "PC"
+    name     = "Developer"
+    capacity = 1
   }
 }
 
-output "app_service_plan_id" {
-  value = "${module.app_service_plan.id}"
+output "api_management_service_id" {
+  value = "${module.integration_account.id}"
 }
 ```
 
