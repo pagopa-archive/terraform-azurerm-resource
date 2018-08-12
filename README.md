@@ -37,7 +37,7 @@ output "integration_account_id" {
 }
 ```
 
-Example 2 (API Management Servie):
+Example 2 (API Management Service):
 
 ```hcl
 resource "azurerm_resource_group" "api_management" {
@@ -98,16 +98,15 @@ Specifies the mode that is used to deploy resources. This value could be either 
 
 (Optional) Some resources allow values that define the SKU to deploy. For example, you can specify the type of redundancy for a storage account.
 
+### tags
+
+Tags that are associated with the resource.
 
 ## Outputs
 
 ### id
 
 The resource ID.
-
-### name
-
-The resource name.
 
 ### template_deployment_id
 
