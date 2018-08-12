@@ -1,10 +1,10 @@
-data "azurerm_resource_group" "resource" {
-  name = "${var.resource_group}"
+provider "azurerm" {
+  version = "~> 1.12"
 }
 
 resource "azurerm_template_deployment" "resource" {
   name                = "${var.name}"
-  resource_group_name = "${data.azurerm_resource_group.resource.name}"
+  resource_group_name = "${var.resource_group}"
   deployment_mode     = "${var.deployment_mode}"
 
   template_body = <<DEPLOY
@@ -23,6 +23,9 @@ resource "azurerm_template_deployment" "resource" {
         },
         "sku": {
             "type": "string"
+        },
+        "tags": {
+            "type": "string"
         }
     },
     "resources": [
@@ -32,7 +35,8 @@ resource "azurerm_template_deployment" "resource" {
             "type": "${var.type}",
             "location": "[resourceGroup().location]",
             "properties": "[json(parameters('properties'))]",
-            "sku": "[json(parameters('sku'))]"
+            "sku": "[json(parameters('sku'))]",
+            "tags": "[json(parameters('tags'))]"
         }
     ],
     "outputs": {
@@ -49,5 +53,6 @@ DEPLOY
     "name"       = "${var.name}"
     "properties" = "${jsonencode(var.properties)}"
     "sku"        = "${jsonencode(var.sku)}"
+    "tags"       = "${jsonencode(var.tags)}"
   }
 }
