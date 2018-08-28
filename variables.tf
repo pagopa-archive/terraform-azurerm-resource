@@ -7,6 +7,16 @@ variable "deployment_mode" {
   description = "Specifies the mode that is used to deploy resources. This value could be either Incremental or Complete."
 }
 
+variable "kind" {
+  default     = ""
+  description = "Some resources allow a value that defines the type of resource you deploy. For example, you can specify the type of Cosmos DB to create."
+}
+
+variable "location" {
+  default     = ""
+  description = "Some resources allow a value that defines the type of resource you deploy. For example, you can specify the type of Cosmos DB to create."
+}
+
 variable "name" {
   description = "Name of the resource. The name must follow URI component restrictions defined in RFC3986."
 }
