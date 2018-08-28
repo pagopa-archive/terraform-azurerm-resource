@@ -78,6 +78,11 @@ output "api_management_service_id" {
 
 (Required) The name of the resource group in which to create the template deployment.
 
+
+### location
+
+(Optional) Specifies the supported Azure location. Most resource types require a location, but some types (such as a role assignment) don't require a location.
+
 ### api_version
 
 (Required) Version of the REST API to use for creating the resource.
@@ -90,6 +95,10 @@ Specifies the mode that is used to deploy resources. This value could be either 
 
 (Required) Type of the resource. This value is a combination of the namespace of the resource provider and the resource type (such as `Microsoft.Storage/storageAccounts`).
 
+### plan
+
+(Optional) Some resources allow values that define the plan to deploy. For example, you can specify the marketplace image for a virtual machine.
+
 ### properties
 
 (Optional) Resource-specific configuration settings. The values for the properties are the same as the values you provide in the request body for the REST API operation (PUT method) to create the resource.
@@ -97,6 +106,10 @@ Specifies the mode that is used to deploy resources. This value could be either 
 ### sku
 
 (Optional) Some resources allow values that define the SKU to deploy. For example, you can specify the type of redundancy for a storage account.
+
+### kind
+
+(Optional) Some resources allow a value that defines the type of resource you deploy. For example, you can specify the type of Cosmos DB to create.
 
 ### tags
 
