@@ -26,6 +26,7 @@ module "integration_account" {
   type           = "Microsoft.Logic/IntegrationAccounts"
   name           = "my-integration-account"
   resource_group = "${azurerm_resource_group.integration_account.name}"
+  location       = "${azurerm_resource_group.integration_account.location}"
 
   sku {
     name = "Standard"
@@ -51,6 +52,7 @@ module "api_management" {
   type           = "Microsoft.ApiManagement/service"
   name           = "my-api-management-service"
   resource_group = "${azurerm_resource_group.api_management.name}"
+  location       = "${azurerm_resource_group.api_management.location}"
 
   properties {
     publisherEmail = "name@example.com"
