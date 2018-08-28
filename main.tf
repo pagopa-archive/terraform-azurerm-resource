@@ -4,7 +4,7 @@ provider "azurerm" {
 
 resource "azurerm_template_deployment" "resource" {
   name                = "${var.name}"
-  resource_group_name = "${var.resource_group}"
+  resource_group_name = "${var.resource_group_name}"
   deployment_mode     = "${var.deployment_mode}"
 
   template_body = <<DEPLOY

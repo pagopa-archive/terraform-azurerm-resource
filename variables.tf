@@ -31,7 +31,7 @@ variable "properties" {
   description = "Resource-specific configuration settings. The values for the properties are the same as the values you provide in the request body for the REST API operation (PUT method) to create the resource."
 }
 
-variable "resource_group" {
+variable "resource_group_name" {
   description = " The name of the resource group in which to create the template deployment."
 }
 
