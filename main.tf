@@ -44,7 +44,7 @@ resource "azurerm_template_deployment" "resource" {
             "type": "${var.type}",
             ${var.location != "" ? "\"location\":\"[parameters('location')]\"," : ""}
             "properties": "[json(parameters('properties'))]",
-            ${var.kind != "" ? "\"kind\":\"[parameters('kind')\"," : ""}
+            ${var.kind != "" ? "\"kind\":\"[parameters('kind')]\"," : ""}
             ${length(var.plan) > 0 ? "\"plan\":\"[json(parameters('plan'))]\"," : ""}
             ${length(var.sku) > 0 ? "\"sku\":\"[json(parameters('sku'))]\"," : ""}
             "tags": "[json(parameters('tags'))]"
