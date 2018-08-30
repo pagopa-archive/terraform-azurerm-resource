@@ -21,12 +21,12 @@ resource "azurerm_resource_group" "integration_account" {
 }
 
 module "integration_account" {
-  source         = "innovationnorway/resource/azurerm"
-  api_version    = "2016-06-01"
-  type           = "Microsoft.Logic/IntegrationAccounts"
-  name           = "my-integration-account"
-  resource_group = "${azurerm_resource_group.integration_account.name}"
-  location       = "${azurerm_resource_group.integration_account.location}"
+  source              = "innovationnorway/resource/azurerm"
+  api_version         = "2016-06-01"
+  type                = "Microsoft.Logic/IntegrationAccounts"
+  name                = "my-integration-account"
+  resource_group_name = "${azurerm_resource_group.integration_account.name}"
+  location            = "${azurerm_resource_group.integration_account.location}"
 
   sku {
     name = "Standard"
@@ -47,12 +47,12 @@ resource "azurerm_resource_group" "api_management" {
 }
 
 module "api_management" {
-  source         = "innovationnorway/resource/azurerm"
-  api_version    = "2018-01-01"
-  type           = "Microsoft.ApiManagement/service"
-  name           = "my-api-management-service"
-  resource_group = "${azurerm_resource_group.api_management.name}"
-  location       = "${azurerm_resource_group.api_management.location}"
+  source              = "innovationnorway/resource/azurerm"
+  api_version         = "2018-01-01"
+  type                = "Microsoft.ApiManagement/service"
+  name                = "my-api-management-service"
+  resource_group_name = "${azurerm_resource_group.api_management.name}"
+  location            = "${azurerm_resource_group.api_management.location}"
 
   properties {
     publisherEmail = "name@example.com"
@@ -76,7 +76,7 @@ output "api_management_service_id" {
 
 (Required) Name of the resource.
 
-### resource_group
+### resource_group_name
 
 (Required) The name of the resource group in which to create the template deployment.
 
