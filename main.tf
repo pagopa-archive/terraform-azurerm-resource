@@ -2,8 +2,10 @@ provider "azurerm" {
   version = "~> 1.13"
 }
 
+resource "random_uuid" "random_deployment_name" {}
+
 resource "azurerm_template_deployment" "resource" {
-  name                = "${var.name}"
+  name                = "${var.random_deployment_name ? random_uuid.random_deployment_name.result : var.name}"
   resource_group_name = "${var.resource_group_name}"
   deployment_mode     = "${var.deployment_mode}"
 
@@ -54,12 +56,12 @@ resource "azurerm_template_deployment" "resource" {
         "id": {
             "type": "string",
             "value": "[resourceId('${var.type}', parameters('name'))]"
-        }
+        }    
     }
 }
 DEPLOY
 
-  parameters {
+  parameters = {
     "apiVersion" = "${var.api_version}"
     "kind"       = "${var.kind}"
     "location"   = "${var.location}"
