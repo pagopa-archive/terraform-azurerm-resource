@@ -21,6 +21,10 @@ variable "name" {
   description = "Name of the resource. The name must follow URI component restrictions defined in RFC3986."
 }
 
+variable "random_deployment_name" {
+  description = "Enable randomly generated deployment name. Used when resource name cannot fit the deployment name restrictions."
+  default = false
+}
 variable "plan" {
   default     = {}
   description = "Some resources allow values that define the plan to deploy. For example, you can specify the marketplace image for a virtual machine."
