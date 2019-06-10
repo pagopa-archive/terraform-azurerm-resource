@@ -2,8 +2,7 @@ provider "azurerm" {
   version = "~> 1.13"
 }
 
-resource "random_uuid" "random_deployment_name" { }
-
+resource "random_uuid" "random_deployment_name" {}
 
 resource "azurerm_template_deployment" "resource" {
   name                = "${var.random_deployment_name? random_uuid.random_deployment_name.result : var.name}"
