@@ -52,11 +52,8 @@ resource "azurerm_template_deployment" "resource" {
             "tags": "[json(parameters('tags'))]"
         }
     ],
-    "outputs": {
-        "id": {
-            "type": "string",
-            "value": "[resourceId('${var.type}', parameters('name'))]"
-        }    
+ "outputs": {
+        ${var.enable_output? "\"id\": { \"type\": \"string\",\"value\": \"[resourceId('${var.type}', parameters('name'))]\"        }": ""}
     }
 }
 DEPLOY

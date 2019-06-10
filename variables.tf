@@ -53,3 +53,8 @@ variable "tags" {
 variable "type" {
   description = "Type of the resource. This value is a combination of the namespace of the resource provider and the resource type (such as Microsoft.Storage/storageAccounts)."
 }
+
+variable "enable_output" {
+  description = "Disable output collection for resources that doesn't support it"
+  default     = false
+}
