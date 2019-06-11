@@ -64,7 +64,11 @@ DEPLOY
     "location"   = "${var.location}"
     "name"       = "${var.name}"
     "plan"       = "${jsonencode(var.plan)}"
-    "properties" = "${jsonencode(var.properties)}"
+    # Jsonencode bug when working with numeric values
+    # Details here https://github.com/hashicorp/terraform/issues/17033
+    # Fixed in terraform 0.12
+    # "properties" = "${jsonencode(var.properties)}"
+    "properties" = "${replace(replace("${jsonencode(var.properties)}","/\"(true|false|[[:digit:]]+)\"/", "$1"), "string:", "")}"
     "sku"        = "${jsonencode(var.sku)}"
     "tags"       = "${jsonencode(var.tags)}"
   }
