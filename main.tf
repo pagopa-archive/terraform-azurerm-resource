@@ -11,7 +11,6 @@ resource "azurerm_template_deployment" "resource" {
 
   template_body = <<DEPLOY
 {
-    "comments": "This deployment must follows : ${var.depends_on[0]} ",
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
@@ -51,6 +50,7 @@ resource "azurerm_template_deployment" "resource" {
             ${length(var.plan) > 0 ? "\"plan\":\"[json(parameters('plan'))]\"," : ""}
             ${length(var.sku) > 0 ? "\"sku\":\"[json(parameters('sku'))]\"," : ""}
             "tags": "[json(parameters('tags'))]"
+            "comments": "This deployment must follows : ${var.depends_on[0]} ",
         }
     ],
  "outputs": {
