@@ -61,5 +61,5 @@ variable "enable_output" {
 
 variable "depends_on" {
   description = "Set a workaround for implementing depends_on between different arm modules"
-  default     = "none"
+  default     = ["none"]
 }

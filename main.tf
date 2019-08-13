@@ -11,7 +11,7 @@ resource "azurerm_template_deployment" "resource" {
 
   template_body = <<DEPLOY
 {
-    // This ARM depends on : "${var.depends_on}"
+    // This ARM depends on : "${var.depends_on[0]}"
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {
