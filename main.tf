@@ -49,8 +49,8 @@ resource "azurerm_template_deployment" "resource" {
             ${var.kind != "" ? "\"kind\":\"[parameters('kind')]\"," : ""}
             ${length(var.plan) > 0 ? "\"plan\":\"[json(parameters('plan'))]\"," : ""}
             ${length(var.sku) > 0 ? "\"sku\":\"[json(parameters('sku'))]\"," : ""}
-            "tags": "[json(parameters('tags'))]"
-            "comments": "This deployment must follows : ${var.depends_on[0]} ",
+            "tags": "[json(parameters('tags'))]",
+            "comments": "This deployment must follows : ${var.depends_on[0]} "
         }
     ],
  "outputs": {
