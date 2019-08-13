@@ -5,12 +5,13 @@ provider "azurerm" {
 resource "random_uuid" "random_deployment_name" {}
 
 resource "azurerm_template_deployment" "resource" {
-  name                = "${var.random_deployment_name? random_uuid.random_deployment_name.result : var.name}"
+  name                = "${var.random_deployment_name ? random_uuid.random_deployment_name.result : var.name}"
   resource_group_name = "${var.resource_group_name}"
   deployment_mode     = "${var.deployment_mode}"
 
   template_body = <<DEPLOY
 {
+    // This ARM depends on : "${var.depends_on}"
     "$schema": "http://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
     "contentVersion": "1.0.0.0",
     "parameters": {

@@ -55,6 +55,11 @@ variable "type" {
 }
 
 variable "enable_output" {
-  description = "Disable output collection for resources that doesn't support it"
+  description = "Disable output collection for resources that doesn't support it."
   default     = false
+}
+
+variable "depends_on" {
+  description = "Set a workaround for implementing depends_on between different arm modules"
+  default     = "none"
 }
