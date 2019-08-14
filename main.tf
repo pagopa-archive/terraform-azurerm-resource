@@ -5,7 +5,7 @@ provider "azurerm" {
 resource "random_uuid" "random_deployment_name" {}
 
 resource "azurerm_template_deployment" "resource" {
-  name                = "${var.random_deployment_name? random_uuid.random_deployment_name.result : var.name}"
+  name                = "${var.random_deployment_name ? random_uuid.random_deployment_name.result : var.name}"
   resource_group_name = "${var.resource_group_name}"
   deployment_mode     = "${var.deployment_mode}"
 
@@ -49,7 +49,8 @@ resource "azurerm_template_deployment" "resource" {
             ${var.kind != "" ? "\"kind\":\"[parameters('kind')]\"," : ""}
             ${length(var.plan) > 0 ? "\"plan\":\"[json(parameters('plan'))]\"," : ""}
             ${length(var.sku) > 0 ? "\"sku\":\"[json(parameters('sku'))]\"," : ""}
-            "tags": "[json(parameters('tags'))]"
+            "tags": "[json(parameters('tags'))]",
+            "comments": "This deployment must follows : ${var.depends_on[0]} "
         }
     ],
  "outputs": {
