@@ -24,7 +24,7 @@ resource "azurerm_template_deployment" "resource" {
             "type": "string"
         },
         "name": {
-            "type": "string"
+            "type": "string"\
         },
         "plan": {
             "type": "string"
@@ -37,7 +37,10 @@ resource "azurerm_template_deployment" "resource" {
         },
         "tags": {
             "type": "string"
-        }
+        },
+        "identity": {
+			"type": "string"
+		}
     },
     "resources": [
         {
@@ -50,6 +53,7 @@ resource "azurerm_template_deployment" "resource" {
             ${length(var.plan) > 0 ? "\"plan\":\"[json(parameters('plan'))]\"," : ""}
             ${length(var.sku) > 0 ? "\"sku\":\"[json(parameters('sku'))]\"," : ""}
             "tags": "[json(parameters('tags'))]",
+            ${length(var.identity) > 0 ? "\"identity\":\"[json(parameters('identity'))]\"," : ""}
             "comments": "This deployment must follows : ${var.depends_on[0]} "
         }
     ],
@@ -72,7 +76,8 @@ DEPLOY
     # "properties" = "${jsonencode(var.properties)}"
     "properties" = "${replace(replace("${jsonencode(var.properties)}","/\"(true|false|[[:digit:]]+|-[[:digit:]]+)\"/", "$1"), "string:", "")}"
 
-    "sku"  = "${jsonencode(var.sku)}"
-    "tags" = "${jsonencode(var.tags)}"
+    "sku"      = "${jsonencode(var.sku)}"
+    "tags"     = "${jsonencode(var.tags)}"
+    "identity" = "${jsonencode(var.identity)}"
   }
 }

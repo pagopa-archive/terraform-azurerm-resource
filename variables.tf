@@ -45,6 +45,11 @@ variable "sku" {
   description = "Some resources allow values that define the SKU to deploy. For example, you can specify the type of redundancy for a storage account."
 }
 
+variable "identity" {
+  default     = {}
+  description = "Some resources allow values that define the identity to deploy. For example, you can specify identity for an APIM."
+}
+
 variable "tags" {
   default     = {}
   description = "Tags that are associated with the resource."
