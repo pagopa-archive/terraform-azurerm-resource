@@ -24,7 +24,7 @@ resource "azurerm_template_deployment" "resource" {
             "type": "string"
         },
         "name": {
-            "type": "string"\
+            "type": "string"
         },
         "plan": {
             "type": "string"
